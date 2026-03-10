@@ -1,0 +1,9 @@
+{
+    "name": "@chess/ui-vue",
+    "version": "1.0.0",
+    "private": true,
+    "description": "PolyglotChess — Vue frontend (placeholder)",
+    "dependencies": {
+        "@chess/core": "*"
+    }
+}

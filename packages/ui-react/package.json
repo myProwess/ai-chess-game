@@ -1,0 +1,9 @@
+{
+    "name": "@chess/ui-react",
+    "version": "1.0.0",
+    "private": true,
+    "description": "PolyglotChess — React frontend (placeholder)",
+    "dependencies": {
+        "@chess/core": "*"
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "name": "@chess/ui-svelte",
+    "version": "1.0.0",
+    "private": true,
+    "description": "PolyglotChess — Svelte frontend (placeholder)",
+    "dependencies": {
+        "@chess/core": "*"
+    }
+}

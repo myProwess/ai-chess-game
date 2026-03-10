@@ -1,0 +1,20 @@
+{
+  "name": "polyglot-chess",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PolyglotChess — A monorepo chess app with React, Svelte, and Vue frontends powered by a shared core engine.",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build:core": "npm run build -w packages/core",
+    "test:core": "npm run test -w packages/core",
+    "dev:react": "npm run dev -w packages/ui-react",
+    "dev:svelte": "npm run dev -w packages/ui-svelte",
+    "dev:vue": "npm run dev -w packages/ui-vue",
+    "build:all": "npm run build:core && npm run build -w packages/ui-react && npm run build -w packages/ui-svelte && npm run build -w packages/ui-vue"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
