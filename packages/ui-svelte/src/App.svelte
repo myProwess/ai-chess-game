@@ -67,7 +67,7 @@
   <!-- UI Overlays -->
   <div class="absolute inset-0 pointer-events-none p-4 flex flex-col">
     <!-- Top Bar -->
-    <div class="flex items-start justify-between pointer-events-auto">
+    <div class="flex items-start justify-between">
       <div class="glass-panel px-5 py-3">
         <h1 class="text-lg font-bold bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">♔ PolyglotChess</h1>
         <p class="text-[10px] text-white/40 uppercase tracking-widest mt-0.5">Svelte · Threlte</p>
@@ -77,7 +77,7 @@
           <button class="glass-button text-xs {themeIdx === i ? 'glass-button-active' : ''}" on:click={() => themeIdx = i}>
             {t.icon} <span class="hidden sm:inline">{t.name}</span>
           </button>
-        {/each}
+        {#/each}
       </div>
     </div>
 
@@ -89,7 +89,7 @@
     </div>
 
     <!-- Bottom -->
-    <div class="flex gap-2 pointer-events-auto">
+    <div class="flex gap-2">
       <button class="glass-button text-xs" on:click={undo}>↩ Undo</button>
       <button class="glass-button text-xs" on:click={reset}>⟳ New Game</button>
     </div>

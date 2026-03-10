@@ -32,7 +32,7 @@ export default function App() {
             {/* ─── UI Overlays (glassmorphism) ───────────────────── */}
             <div className="absolute inset-0 pointer-events-none p-4 flex flex-col">
                 {/* ── Top Bar ──────────────────────────────────────── */}
-                <div className="flex items-start justify-between gap-4 pointer-events-auto">
+                <div className="flex items-start justify-between gap-4">
                     {/* Logo / Title */}
                     <div className="glass-panel px-5 py-3">
                         <h1 className="text-lg font-bold tracking-tight bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
@@ -58,7 +58,7 @@ export default function App() {
                     </div>
 
                     {/* Center: Game status */}
-                    <div className="flex-1 flex items-center justify-center pointer-events-auto">
+                    <div className="flex-1 flex items-center justify-center">
                         <GameStatusBanner status={chess.gameStatus} />
                     </div>
 
@@ -69,7 +69,7 @@ export default function App() {
                 </div>
 
                 {/* ── Bottom Bar ───────────────────────────────────── */}
-                <div className="flex items-end justify-between pointer-events-auto">
+                <div className="flex items-end justify-between">
                     <ControlsBar onUndo={chess.undo} onReset={chess.reset} />
                     <div className="glass-badge text-white/40">
                         FEN: <span className="font-mono text-[10px]">{chess.fen.split(' ').slice(0, 2).join(' ')}…</span>

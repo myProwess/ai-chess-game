@@ -91,129 +91,102 @@ function BoardSquare({
 }
 
 /* ─── 3D Piece geometry composed from primitives ────────────── */
-function PieceGeometry({ type }: { type: string }) {
+interface PieceGeometryProps {
+    type: string;
+    material: THREE.Material;
+}
+
+function PieceGeometry({ type, material }: PieceGeometryProps) {
+    const meshProps = { material, castShadow: true };
+
     switch (type) {
         case 'p': // Pawn
             return (
                 <group>
-                    <mesh position={[0, 0.08, 0]} castShadow>
+                    <mesh position={[0, 0.08, 0]} {...meshProps}>
                         <cylinderGeometry args={[0.28, 0.32, 0.16, 20]} />
                     </mesh>
-                    <mesh position={[0, 0.32, 0]} castShadow>
-                        <cylinderGeometry args={[0.14, 0.22, 0.35, 20]} />
+                    <mesh position={[0, 0.32, 0]} {...meshProps}>
+                        <cylinderGeometry args={[0.12, 0.22, 0.38, 20]} />
                     </mesh>
-                    <mesh position={[0, 0.6, 0]} castShadow>
-                        <sphereGeometry args={[0.16, 16, 16]} />
+                    <mesh position={[0, 0.58, 0]} {...meshProps}>
+                        <sphereGeometry args={[0.14, 16, 16]} />
                     </mesh>
                 </group>
             );
         case 'r': // Rook
             return (
                 <group>
-                    <mesh position={[0, 0.08, 0]} castShadow>
-                        <cylinderGeometry args={[0.3, 0.34, 0.16, 20]} />
+                    <mesh position={[0, 0.08, 0]} {...meshProps}>
+                        <cylinderGeometry args={[0.28, 0.32, 0.16, 20]} />
                     </mesh>
-                    <mesh position={[0, 0.38, 0]} castShadow>
-                        <cylinderGeometry args={[0.18, 0.24, 0.45, 20]} />
+                    <mesh position={[0, 0.38, 0]} {...meshProps}>
+                        <cylinderGeometry args={[0.18, 0.22, 0.52, 20]} />
                     </mesh>
-                    <mesh position={[0, 0.68, 0]} castShadow>
-                        <cylinderGeometry args={[0.24, 0.2, 0.15, 20]} />
-                    </mesh>
-                    {/* Crenellations */}
-                    <mesh position={[-0.14, 0.82, 0]} castShadow>
-                        <boxGeometry args={[0.1, 0.12, 0.1]} />
-                    </mesh>
-                    <mesh position={[0.14, 0.82, 0]} castShadow>
-                        <boxGeometry args={[0.1, 0.12, 0.1]} />
-                    </mesh>
-                    <mesh position={[0, 0.82, 0.14]} castShadow>
-                        <boxGeometry args={[0.1, 0.12, 0.1]} />
-                    </mesh>
-                    <mesh position={[0, 0.82, -0.14]} castShadow>
-                        <boxGeometry args={[0.1, 0.12, 0.1]} />
+                    <mesh position={[0, 0.65, 0]} {...meshProps}>
+                        <cylinderGeometry args={[0.22, 0.18, 0.12, 20]} />
                     </mesh>
                 </group>
             );
         case 'n': // Knight
             return (
                 <group>
-                    <mesh position={[0, 0.08, 0]} castShadow>
+                    <mesh position={[0, 0.08, 0]} {...meshProps}>
                         <cylinderGeometry args={[0.28, 0.32, 0.16, 20]} />
                     </mesh>
-                    <mesh position={[0, 0.38, 0]} castShadow>
-                        <cylinderGeometry args={[0.13, 0.22, 0.45, 20]} />
+                    <mesh position={[0, 0.35, 0]} {...meshProps}>
+                        <cylinderGeometry args={[0.12, 0.22, 0.38, 20]} />
                     </mesh>
-                    {/* Horse head - stylized */}
-                    <mesh position={[0, 0.72, 0.08]} rotation={[0.4, 0, 0]} castShadow>
-                        <boxGeometry args={[0.18, 0.35, 0.22]} />
-                    </mesh>
-                    <mesh position={[0, 0.9, 0.18]} rotation={[0.6, 0, 0]} castShadow>
-                        <boxGeometry args={[0.12, 0.15, 0.16]} />
+                    <mesh position={[0, 0.65, 0.06]} rotation={[0.4, 0, 0]} {...meshProps}>
+                        <boxGeometry args={[0.16, 0.28, 0.18]} />
                     </mesh>
                 </group>
             );
         case 'b': // Bishop
             return (
                 <group>
-                    <mesh position={[0, 0.08, 0]} castShadow>
+                    <mesh position={[0, 0.08, 0]} {...meshProps}>
                         <cylinderGeometry args={[0.28, 0.32, 0.16, 20]} />
                     </mesh>
-                    <mesh position={[0, 0.4, 0]} castShadow>
-                        <cylinderGeometry args={[0.1, 0.22, 0.5, 20]} />
+                    <mesh position={[0, 0.38, 0]} {...meshProps}>
+                        <cylinderGeometry args={[0.12, 0.22, 0.52, 20]} />
                     </mesh>
-                    <mesh position={[0, 0.76, 0]} castShadow>
+                    <mesh position={[0, 0.72, 0]} {...meshProps}>
                         <coneGeometry args={[0.14, 0.3, 16]} />
-                    </mesh>
-                    <mesh position={[0, 0.95, 0]} castShadow>
-                        <sphereGeometry args={[0.06, 12, 12]} />
                     </mesh>
                 </group>
             );
         case 'q': // Queen
             return (
                 <group>
-                    <mesh position={[0, 0.08, 0]} castShadow>
-                        <cylinderGeometry args={[0.3, 0.34, 0.16, 20]} />
+                    <mesh position={[0, 0.08, 0]} {...meshProps}>
+                        <cylinderGeometry args={[0.28, 0.32, 0.16, 20]} />
                     </mesh>
-                    <mesh position={[0, 0.42, 0]} castShadow>
-                        <cylinderGeometry args={[0.12, 0.24, 0.52, 20]} />
+                    <mesh position={[0, 0.45, 0]} {...meshProps}>
+                        <cylinderGeometry args={[0.13, 0.24, 0.78, 20]} />
                     </mesh>
-                    {/* Crown points */}
-                    {[0, 1, 2, 3, 4].map((i) => {
-                        const angle = (i / 5) * Math.PI * 2;
-                        return (
-                            <mesh
-                                key={i}
-                                position={[Math.cos(angle) * 0.12, 0.78, Math.sin(angle) * 0.12]}
-                                castShadow
-                            >
-                                <coneGeometry args={[0.04, 0.14, 8]} />
-                            </mesh>
-                        );
-                    })}
-                    <mesh position={[0, 0.88, 0]} castShadow>
-                        <sphereGeometry args={[0.08, 14, 14]} />
+                    <mesh position={[0, 0.9, 0]} {...meshProps}>
+                        <sphereGeometry args={[0.1, 14, 14]} />
+                    </mesh>
+                    <mesh position={[0, 1.0, 0]} {...meshProps}>
+                        <coneGeometry args={[0.06, 0.12, 8]} />
                     </mesh>
                 </group>
             );
         case 'k': // King
             return (
                 <group>
-                    <mesh position={[0, 0.08, 0]} castShadow>
-                        <cylinderGeometry args={[0.3, 0.34, 0.16, 20]} />
+                    <mesh position={[0, 0.08, 0]} {...meshProps}>
+                        <cylinderGeometry args={[0.28, 0.32, 0.16, 20]} />
                     </mesh>
-                    <mesh position={[0, 0.45, 0]} castShadow>
-                        <cylinderGeometry args={[0.13, 0.24, 0.58, 20]} />
+                    <mesh position={[0, 0.45, 0]} {...meshProps}>
+                        <cylinderGeometry args={[0.13, 0.24, 0.78, 20]} />
                     </mesh>
-                    <mesh position={[0, 0.82, 0]} castShadow>
-                        <cylinderGeometry args={[0.16, 0.14, 0.12, 20]} />
-                    </mesh>
-                    {/* Cross */}
-                    <mesh position={[0, 1.0, 0]} castShadow>
+                    <mesh position={[0, 0.9, 0]} {...meshProps}>
                         <boxGeometry args={[0.06, 0.28, 0.06]} />
                     </mesh>
-                    <mesh position={[0, 1.06, 0]} castShadow>
-                        <boxGeometry args={[0.2, 0.06, 0.06]} />
+                    <mesh position={[0, 1.0, 0]} {...meshProps}>
+                        <boxGeometry args={[0.18, 0.06, 0.06]} />
                     </mesh>
                 </group>
             );
@@ -292,58 +265,37 @@ function MeshMaterial({
 }
 
 /* ─── Piece with integrated material ────────────────────────── */
-function PieceWithMaterial({
-    piece,
-    row,
-    col,
-    theme,
-    onClick,
-}: {
+interface PieceWithMaterialProps {
     piece: PieceInfo;
     row: number;
     col: number;
     theme: ChessTheme;
     onClick: () => void;
-}) {
-    const groupRef = useRef<THREE.Group>(null);
+}
+
+function PieceWithMaterial({ piece, row, col, theme, onClick }: PieceWithMaterialProps) {
     const x = col - 3.5;
     const z = row - 3.5;
-    const color = piece.color === 'w' ? theme.whitePiece : theme.blackPiece;
-    const emColor = theme.emissiveIntensity > 0 ? color : '#000000';
 
     const material = useMemo(
         () =>
             new THREE.MeshStandardMaterial({
-                color: new THREE.Color(color),
-                roughness: theme.pieceRoughness,
-                metalness: theme.pieceMetalness,
-                emissive: new THREE.Color(emColor),
-                emissiveIntensity: theme.emissiveIntensity,
+                color: piece.color === 'w' ? theme.pieceColors.white : theme.pieceColors.black,
+                roughness: 0.25,
+                metalness: 0.15,
             }),
-        [color, theme.pieceRoughness, theme.pieceMetalness, emColor, theme.emissiveIntensity],
+        [piece.color, theme],
     );
-
-    // Apply material to all child meshes
-    useFrame(() => {
-        if (groupRef.current) {
-            groupRef.current.traverse((child) => {
-                if ((child as THREE.Mesh).isMesh) {
-                    (child as THREE.Mesh).material = material;
-                }
-            });
-        }
-    });
 
     return (
         <group
-            ref={groupRef}
-            position={[x, 0.01, z]}
+            position={[x, 0.05, z]}
             onClick={(e) => {
                 e.stopPropagation();
                 onClick();
             }}
         >
-            <PieceGeometry type={piece.type} />
+            <PieceGeometry type={piece.type} material={material} />
         </group>
     );
 }
@@ -388,6 +340,9 @@ function BoardFrame({ theme }: { theme: ChessTheme }) {
 }
 
 /* ─── Main Scene ────────────────────────────────────────────── */
+const FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+const RANKS = ['8', '7', '6', '5', '4', '3', '2', '1'];
+
 function Scene({ board, theme, selectedSquare, legalMoveSquares, onSquareClick }: ChessSceneProps) {
     const squareToRowCol = (sq: Square): [number, number] => {
         return [8 - parseInt(sq[1]), sq.charCodeAt(0) - 97];
@@ -398,109 +353,40 @@ function Scene({ board, theme, selectedSquare, legalMoveSquares, onSquareClick }
     };
 
     const selectedRC = selectedSquare ? squareToRowCol(selectedSquare) : null;
-    const legalMoveSet = new Set(legalMoveSquares);
+    const legalSet = new Set(legalMoveSquares);
 
     return (
-        <>
+    <>
             {/* Lighting */}
             <ambientLight intensity={0.4} />
-            <directionalLight
-                position={[8, 15, 8]}
-                intensity={1.2}
-                castShadow
-                shadow-mapSize-width={2048}
-                shadow-mapSize-height={2048}
-                shadow-camera-left={-6}
-                shadow-camera-right={6}
-                shadow-camera-top={6}
-                shadow-camera-bottom={-6}
-            />
+            <directionalLight position={[8, 15, 8]} intensity={1.2} castShadow />
             <pointLight position={[-5, 8, -5]} intensity={0.3} color="#ffeedd" />
 
             {theme.id === 'cyberpunk' && (
                 <>
-                    <pointLight position={[5, 3, 5]} intensity={0.5} color="#00fff5" />
-                    <pointLight position={[-5, 3, -5]} intensity={0.5} color="#ff00e5" />
+                    <OrbitControls
+                        makeDefault
+                        minPolarAngle={0.3}
+                        maxPolarAngle={Math.PI / 2.2}
+                        minDistance={6}
+                        maxDistance={18}
+                        enablePan={false}
+                        target={[0, 0, 0]}
+                    />
                 </>
-            )}
-
-            {/* Board Frame */}
-            <BoardFrame theme={theme} />
-
-            {/* Board Squares */}
-            {board.map((row, rowIdx) =>
-                row.map((_, colIdx) => {
-                    const square = rowColToSquare(rowIdx, colIdx);
-                    const isLight = (rowIdx + colIdx) % 2 === 0;
-                    const isSelected = selectedRC?.[0] === rowIdx && selectedRC?.[1] === colIdx;
-                    const isLegalMove = legalMoveSet.has(square);
-
-                    return (
-                        <BoardSquare
-                            key={`${rowIdx}-${colIdx}`}
-                            row={rowIdx}
-                            col={colIdx}
-                            isLight={isLight}
-                            isSelected={isSelected}
-                            isLegalMove={isLegalMove}
-                            theme={theme}
-                            onClick={() => onSquareClick(square)}
-                        />
-                    );
-                }),
-            )}
-
-            {/* Chess Pieces */}
-            {board.map((row, rowIdx) =>
-                row.map((piece, colIdx) => {
-                    if (!piece) return null;
-                    const square = rowColToSquare(rowIdx, colIdx);
-                    return (
-                        <PieceWithMaterial
-                            key={`piece-${rowIdx}-${colIdx}-${piece.type}-${piece.color}`}
-                            piece={piece}
-                            row={rowIdx}
-                            col={colIdx}
-                            theme={theme}
-                            onClick={() => onSquareClick(square)}
-                        />
-                    );
-                }),
-            )}
-
-            {/* Contact shadows for grounding */}
-            <ContactShadows
-                position={[0, -0.12, 0]}
-                opacity={0.4}
-                scale={12}
-                blur={2}
-                far={4}
-            />
-
-            {/* Camera controls */}
-            <OrbitControls
-                makeDefault
-                minPolarAngle={0.3}
-                maxPolarAngle={Math.PI / 2.2}
-                minDistance={6}
-                maxDistance={18}
-                enablePan={false}
-                target={[0, 0, 0]}
-            />
-        </>
-    );
+            );
 }
 
-/* ─── Exported Canvas Wrapper ───────────────────────────────── */
-export default function ChessScene(props: ChessSceneProps) {
+            /* ─── Exported Canvas Wrapper ───────────────────────────────── */
+            export default function ChessScene(props: ChessSceneProps) {
     return (
-        <Canvas
-            shadows
-            camera={{ position: [0, 10, 8], fov: 45 }}
-            gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
-            style={{ background: `linear-gradient(135deg, ${props.theme.bgGradient[0]}, ${props.theme.bgGradient[1]})` }}
-        >
-            <Scene {...props} />
-        </Canvas>
-    );
+            <Canvas
+                shadows
+                camera={{ position: [0, 10, 8], fov: 45 }}
+                gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
+                style={{ background: `linear-gradient(135deg, ${props.theme.bgGradient[0]}, ${props.theme.bgGradient[1]})` }}
+            >
+                <Scene {...props} />
+            </Canvas>
+            );
 }

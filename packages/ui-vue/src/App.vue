@@ -95,7 +95,7 @@ const movePairs = computed<MovePair[]>(() => {
             </TresMesh>
 
             <!-- Piece -->
-            <TresGroup v-if="piece" :position="[colIdx - 3.5, 0.01, rowIdx - 3.5]" @click="handleSquareClick(rowIdx, colIdx)">
+            <TresGroup v-if="piece" :position="[colIdx - 3.5, 0.01, rowIdx - 3.5]" @click.stop="handleSquareClick(rowIdx, colIdx)">
               <!-- Base -->
               <TresMesh :position="[0, 0.08, 0]" cast-shadow>
                 <TresCylinderGeometry :args="[0.28, 0.32, 0.16, 20]" />
@@ -159,7 +159,7 @@ const movePairs = computed<MovePair[]>(() => {
     <!-- UI Overlays -->
     <div class="absolute inset-0 pointer-events-none p-4 flex flex-col">
       <!-- Top -->
-      <div class="flex items-start justify-between pointer-events-auto">
+      <div class="flex items-start justify-between">
         <div class="glass-panel px-5 py-3">
           <h1 class="text-lg font-bold bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">♔ PolyglotChess</h1>
           <p class="text-[10px] text-white/40 uppercase tracking-widest mt-0.5">Vue · TresJS</p>
@@ -174,7 +174,7 @@ const movePairs = computed<MovePair[]>(() => {
       <!-- Middle -->
       <div class="flex-1 flex items-stretch justify-between py-4">
         <!-- Left: Players + Captures -->
-        <div class="flex flex-col gap-3 w-52 pointer-events-auto">
+        <div class="flex flex-col gap-3 w-52">
           <div :class="['glass-panel px-4 py-3 flex items-center gap-3 transition-all', turn === 'b' ? 'ring-2 ring-white/30' : 'opacity-70']">
             <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg font-bold bg-gradient-to-br from-gray-700 to-gray-900 text-white">♚</div>
             <div><div class="text-sm font-semibold text-white/90">Player 2</div><div class="text-xs text-white/50">Black</div></div>
@@ -194,7 +194,7 @@ const movePairs = computed<MovePair[]>(() => {
         </div>
 
         <!-- Center: Status -->
-        <div class="flex-1 flex items-center justify-center pointer-events-auto">
+        <div class="flex-1 flex items-center justify-center">
           <div v-if="gameStatus.isCheckmate" class="glass-panel bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border-amber-400/30 px-5 py-3 text-center animate-pulse">
             <span class="text-sm font-bold text-white/95">Checkmate! {{ gameStatus.winner === 'w' ? 'White' : 'Black' }} wins!</span>
           </div>
@@ -207,7 +207,7 @@ const movePairs = computed<MovePair[]>(() => {
         </div>
 
         <!-- Right: Move History -->
-        <div class="w-56 pointer-events-auto">
+        <div class="w-56">
           <div class="glass-panel px-4 py-3 flex flex-col max-h-80">
             <div class="text-xs font-semibold text-white/60 uppercase tracking-wider mb-2">Move History</div>
             <div class="flex-1 overflow-y-auto space-y-0.5" style="scrollbar-width: thin;">
@@ -223,7 +223,7 @@ const movePairs = computed<MovePair[]>(() => {
       </div>
 
       <!-- Bottom -->
-      <div class="flex gap-2 pointer-events-auto">
+      <div class="flex gap-2">
         <button class="glass-button text-xs" @click="undo">↩ Undo</button>
         <button class="glass-button text-xs" @click="reset">⟳ New Game</button>
       </div>

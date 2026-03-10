@@ -105,7 +105,10 @@
             {@const pColor = piece.color === "w" ? theme.wPiece : theme.bPiece}
             <T.Group
                 position={[colIdx - 3.5, 0.01, rowIdx - 3.5]}
-                on:click={() => handleClick(rowIdx, colIdx)}
+                on:click={(e) => {
+                    e.stopPropagation();
+                    handleClick(rowIdx, colIdx);
+                }}
             >
                 <!-- Base (all pieces) -->
                 <T.Mesh position={[0, 0.08, 0]} castShadow>

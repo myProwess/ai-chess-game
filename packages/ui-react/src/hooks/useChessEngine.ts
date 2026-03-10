@@ -64,7 +64,9 @@ export function useChessEngine(): UseChessEngineReturn {
 
     const selectSquare = useCallback(
         (square: Square) => {
-            if (gameStatus.isGameOver) return;
+            if (gameStatus.isGameOver) {
+                return;
+            }
 
             // If clicking same square, deselect
             if (selectedSquare === square) {
@@ -75,7 +77,7 @@ export function useChessEngine(): UseChessEngineReturn {
 
             // If a piece is selected and clicked square is a legal move, make the move
             if (selectedSquare && legalMoveSquares.includes(square)) {
-                const result = engine.move({ from: selectedSquare, to: square, promotion: 'q' });
+                engine.move({ from: selectedSquare, to: square, promotion: 'q' });
                 setSelectedSquare(null);
                 setLegalMoveSquares([]);
                 return;
