@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="PolyglotChess — Choose your frontend: React, Svelte, or Vue. Same chess engine, three stunning 3D experiences." />
+    <title>PolyglotChess — Choose Your Framework</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a14 0%, #0d0520 40%, #08081a 100%);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Animated background orbs */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .bg-orb-1 {
+            width: 500px;
+            height: 500px;
+            background: #6366f1;
+            top: -200px;
+            left: -100px;
+            animation-delay: -5s;
+        }
+
+        .bg-orb-2 {
+            width: 400px;
+            height: 400px;
+            background: #ec4899;
+            bottom: -150px;
+            right: -100px;
+            animation-delay: -10s;
+        }
+
+        .bg-orb-3 {
+            width: 300px;
+            height: 300px;
+            background: #06b6d4;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -15s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.95);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.6) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2.5rem 1.5rem;
+            border-radius: 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1rem;
+        }
+
+        .card-react .card-icon {
+            background: linear-gradient(135deg, #61dafb33, #61dafb11);
+            color: #61dafb;
+        }
+
+        .card-svelte .card-icon {
+            background: linear-gradient(135deg, #ff3e0033, #ff3e0011);
+            color: #ff3e00;
+        }
+
+        .card-vue .card-icon {
+            background: linear-gradient(135deg, #42b88333, #42b88311);
+            color: #42b883;
+        }
+
+        .card h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.5;
+        }
+
+        .card .tech {
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 768px) {
+            .cards {
+                grid-template-columns: 1fr;
+                max-width: 360px;
+                margin-inline: auto;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+
+    <div class="container">
+        <div class="logo">♔</div>
+        <h1>PolyglotChess</h1>
+        <p class="subtitle">One Engine · Three Frameworks · Infinite Possibilities</p>
+
+        <div class="cards">
+            <a href="./react/" class="card card-react">
+                <div class="card-icon">⚛️</div>
+                <h2>React</h2>
+                <p>Built with React Three Fiber & Drei for high-fidelity 3D rendering.</p>
+                <span class="tech">react-three-fiber · drei · TailwindCSS</span>
+            </a>
+
+            <a href="./svelte/" class="card card-svelte">
+                <div class="card-icon">🔥</div>
+                <h2>Svelte</h2>
+                <p>Powered by Threlte for a declarative, performant 3D experience.</p>
+                <span class="tech">threlte · svelte · TailwindCSS</span>
+            </a>
+
+            <a href="./vue/" class="card card-vue">
+                <div class="card-icon">💚</div>
+                <h2>Vue</h2>
+                <p>Leveraging TresJS to bring Vue's reactivity to the 3D canvas.</p>
+                <span class="tech">tresjs · cientos · TailwindCSS</span>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>

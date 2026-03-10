@@ -1,0 +1,67 @@
+name: Deploy PolyglotChess to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build core library
+        run: npm run build:core
+
+      - name: Build React frontend
+        run: npm run build -w packages/ui-react
+
+      - name: Build Svelte frontend
+        run: npm run build -w packages/ui-svelte
+
+      - name: Build Vue frontend
+        run: npm run build -w packages/ui-vue
+
+      - name: Assemble deployment
+        run: |
+          mkdir -p deploy
+          cp public/index.html deploy/
+          cp -r packages/ui-react/dist deploy/react
+          cp -r packages/ui-svelte/dist deploy/svelte
+          cp -r packages/ui-vue/dist deploy/vue
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: deploy
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
